@@ -4,7 +4,6 @@ package org.example;
  * Hello world!
  */
 
-import lombok.var;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Map<String, Map<String, Object>> config = new Yaml().load(Files.newInputStream(Paths.get("application.yaml")));
 
-        Map<String, Object> sqlServerConfig = config.get("sqlServer");
+        var sqlServerConfig = config.get("sqlServer");
         var sqlServerDatabaseConfig = new SqlServerDatabase.SqlServerDatabaseConfig(
                 (String) sqlServerConfig.get("host"),
                 (int) sqlServerConfig.get("port"),
@@ -26,7 +25,7 @@ public class Main {
         );
         var sqlServerDatabase = new SqlServerDatabase(sqlServerDatabaseConfig);
 
-        Map<String, Object> postgresConfig = config.get("postgres");
+        var postgresConfig = config.get("postgres");
         PostgresDatabase.PostgresDatabaseConfig postgresDatabaseConfig = new PostgresDatabase.PostgresDatabaseConfig(
                 (String) postgresConfig.get("host"),
                 (int) postgresConfig.get("port"),
@@ -34,7 +33,7 @@ public class Main {
                 (String) postgresConfig.get("username"),
                 (String) postgresConfig.get("password")
         );
-        PostgresDatabase postgresDatabase = new PostgresDatabase(postgresDatabaseConfig);
+        var postgresDatabase = new PostgresDatabase(postgresDatabaseConfig);
 
         postgresDatabase.dropDatabases("ci%");
         sqlServerDatabase.dropDatabases("ci%");
