@@ -1,0 +1,13 @@
+sqlServer:
+  host: localhost
+  port: 1433
+  database: migration
+  username: sa
+  password: sa
+
+postgres:
+  host: localhost
+  port: 5432
+  database: postgres
+  username: postgres
+  password: postgres
